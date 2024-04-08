@@ -1,3 +1,4 @@
+@import "@strifeapp/style" layer(strife);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
