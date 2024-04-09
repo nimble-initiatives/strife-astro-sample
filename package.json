@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/lit": "^4.0.1",
     "@astrojs/mdx": "^2.1.1",
     "@astrojs/preact": "^3.1.0",
     "@astrojs/rss": "^4.0.5",
@@ -23,6 +24,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "astro": "^4.4.0",
+    "lit": "^3.1.2",
     "preact": "^10.19.5",
     "ravendb": "^5.4.2",
     "tailwindcss": "^3.4.1"
