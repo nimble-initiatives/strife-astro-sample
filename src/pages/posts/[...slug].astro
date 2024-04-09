@@ -1,15 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
-import MarkdownPostLayout from '../../layouts/MarkdownPostLayout.astro';
-export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
-}
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+import store from '@/store/index';
+import PostLayout from '@/layouts/PostLayout.astro';
+
+const session = store.openSession();
+
+const post = await session
+  .query({ indexName: 'Content/ByUrl' })
+  .whereEquals('url', Astro.url.pathname.replace('/posts','').replace(/\/$/, '')) // remove trailing slash
+  .firstOrNull();
+
 ---
-<MarkdownPostLayout frontmatter={entry.data}>
-  <Content />
-</MarkdownPostLayout>
+<PostLayout post={post} />

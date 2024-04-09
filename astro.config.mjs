@@ -19,4 +19,10 @@ export default defineConfig({
   },
   site: 'https://lexingtonthemes.com',
   integrations: [tailwind(), sitemap(), mdx(), lit()],
+  output: "server",
+  vite: {
+    ssr: {
+      noExternal: ['@strifeapp/strife']
+    }
+  },
 });

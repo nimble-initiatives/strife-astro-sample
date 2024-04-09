@@ -1,4 +1,5 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
+import { subscribe } from '@strifeapp/strife';
 import sheet from '../../styles/global.css?inline' assert { type: 'css' };
 
 export class PostList extends LitElement {
@@ -12,13 +13,20 @@ export class PostList extends LitElement {
     super();
     this.posts = [];
   }
+  firstUpdated() {
+    this.unsubscribe = subscribe((data) => this.posts = data.posts.documents);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.unsubscribe();
+  }
   render() {
     return html`
       <ul class="grid grid-cols-1 mt-12 gap-1 gap-y-24 lg:grid-cols-3 sm:grid-cols-2">
-      ${this.posts.map(
+      ${this.posts?.map(
         (item) => html`
           <li>
-            <a href="/posts/${item.url}" title="${item.title}" class="group">
+            <a href="/posts${item.url}" title="${item.title}" class="group">
               <article class="flex-1 h-full flex flex-col">
                 <div class="block w-full lg:col-span-2">
                   <img
@@ -46,7 +54,7 @@ export class PostList extends LitElement {
 
                   <div class="mt-4 flex space-x-2">
                     ${
-                      item.labelNames.map((tag) => html`
+                      item.labelNames?.map((tag) => html`
                         <span class="text-xs font-medium text-black">${tag}</span>
                       `)
                     }

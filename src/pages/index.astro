@@ -32,7 +32,7 @@ const sortedPosts = home.posts ? await session.advanced.rawQuery(home.posts.quer
           ))
         }
       </ol>
-      <PostList posts={sortedPosts} />
+      <PostList posts={sortedPosts} client:only="lit" />
     </div>
   </section>
   <Cta />
