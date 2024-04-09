@@ -16,23 +16,7 @@ const home = await session
   .firstOrNull();
 
 // Get selected posts
-// const sortedPosts = await session.advanced.rawQuery("from index 'Content/ByUrl' as c order by c.publishedDate desc limit 6").all();
-
-const sortedPosts = await session.advanced.rawQuery(
-  `from index 'Content/ByUrl' as c
-      where c.collection == 'posts'
-      order by c.publishedDate desc
-      load c.labels as labels[]
-      select {
-          name: c.displayName,
-          publishedDate: c.publishedDate,
-          tags: labels,
-          url: c.url,
-          images: c.images,
-          title: c.title,
-          author: c.author,
-        } limit 6`
-).all();
+const sortedPosts = home.posts ? await session.advanced.rawQuery(home.posts.query).all() : [];
 ---
 
 <BaseLayout>

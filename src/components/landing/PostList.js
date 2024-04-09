@@ -46,8 +46,8 @@ export class PostList extends LitElement {
 
                   <div class="mt-4 flex space-x-2">
                     ${
-                      item.tags.map((tag) => html`
-                        <span class="text-xs font-medium text-black">${tag.name}</span>
+                      item.labelNames.map((tag) => html`
+                        <span class="text-xs font-medium text-black">${tag}</span>
                       `)
                     }
                   </div>
