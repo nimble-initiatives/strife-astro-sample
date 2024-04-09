@@ -2,16 +2,11 @@
 import store from "@/store/index";
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import EntriesOne from "@/components/entries/EntriesOne.astro";
 import Hero from "@/components/landing/Hero.astro";
+import { PostList } from "@/components/landing/PostList";
 import Cta from "@/components/global/Cta.astro";
 const allPosts = await getCollection("posts");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
-
-// Sort posts by date in descending order (newest first)
-const sortedPosts = allPosts.sort(
-  (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
-);
 
 // Get the home page content
 const session = store.openSession();
@@ -19,6 +14,25 @@ const home = await session
   .query({ indexName: 'Content/ByUrl' })
   .whereEquals('url', Astro.url.pathname)
   .firstOrNull();
+
+// Get selected posts
+// const sortedPosts = await session.advanced.rawQuery("from index 'Content/ByUrl' as c order by c.publishedDate desc limit 6").all();
+
+const sortedPosts = await session.advanced.rawQuery(
+  `from index 'Content/ByUrl' as c
+      where c.collection == 'posts'
+      order by c.publishedDate desc
+      load c.labels as labels[]
+      select {
+          name: c.displayName,
+          publishedDate: c.publishedDate,
+          tags: labels,
+          url: c.url,
+          images: c.images,
+          title: c.title,
+          author: c.author,
+        } limit 6`
+).all();
 ---
 
 <BaseLayout>
@@ -34,24 +48,7 @@ const home = await session
           ))
         }
       </ol>
-      <ul
-        class="grid grid-cols-1 mt-12 gap-1 gap-y-24 lg:grid-cols-3 sm:grid-cols-2"
-      >
-        {
-          sortedPosts.map((post) => (
-            <EntriesOne
-              url={"/posts/" + post.slug}
-              title={post.data.title}
-              description={post.data.description}
-              alt={post.data.title}
-              pubDate={post.data.pubDate.toString().slice(0, 10)}
-              author={post.data.author}
-              image={post.data.image.url}
-              tags={post.data.tags}
-            />
-          ))
-        }
-      </ul>
+      <PostList posts={sortedPosts} />
     </div>
   </section>
   <Cta />
