@@ -6,7 +6,7 @@ const session = store.openSession();
 
 const post = await session
   .query({ indexName: 'Content/ByUrl' })
-  .whereEquals('url', Astro.url.pathname.replace('/posts','').replace(/\/$/, '')) // remove trailing slash
+  .whereEquals('url', Astro.url.pathname.replace(/\/$/, '')) // remove trailing slash
   .firstOrNull();
 
 ---

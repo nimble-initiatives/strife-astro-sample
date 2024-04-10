@@ -45,17 +45,17 @@ Use AstroSeo in all the pages you want different Seo than the index page
   <section>
     <div class="px-8 py-12 md:px-12 mx-auto lg:pt-24 max-w-7xl lg:px-32">
       <div class="lg:text-center">
-          <picture>
+          <picture is="str-picture" data-field="images">
             <!-- Desktop image -->
-            <source media="(min-width: 768px)" srcset={post?.images?.desktop.source.url} sizes="1024px" />
+            <source media="(min-width: 1024px)" srcset={post?.images?.desktop.source.url} sizes="1024px" width="1024" height="288" data-property-media="desktop" />
             <!-- Tablet image -->
-            <source media="(max-width: 767px)" srcset={post?.images?.tablet.source.url} sizes="927px" />
+            <source media="(max-width: 1023px)" srcset={post?.images?.tablet.source.url} sizes="927px" width="927" height="1236" data-property-media="tablet" />
             <!-- Fallback for browsers that do not support `<picture>` element -->
-            <img class="lg:h-72 w-full  object-cover object-center" src={post?.images?.desktop.source.url} alt="Fallback image description" />
+            <img class="lg:h-72 w-full  object-cover object-center" src={post?.images?.desktop.source.url} alt="Fallback image description" width="1024" height="288" />
           </picture>
 
          <div class="flex  flex-col md:flex-row mt-4 justify-between">
-            <p class="text-xs text-zinc-500 ">{new Date(post?.publishedDate).toString().slice(0, 10)} - Written by: {post?.author}</p>
+            <p class="text-xs text-zinc-500 ">{new Date(post?.publishedDate).toString().slice(0, 10)} - Written by: <span is="str-span" data-field="author">{post?.author}</span></p>
            <div class="flex gap-3">
               <!-- {
                 post.tags.map((tag) => (
