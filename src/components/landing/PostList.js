@@ -1,5 +1,4 @@
 import { LitElement, html, css, unsafeCSS } from 'lit';
-import { subscribe } from '@strifeapp/strife';
 import sheet from '../../styles/global.css?inline' assert { type: 'css' };
 
 export class PostList extends LitElement {
@@ -12,13 +11,6 @@ export class PostList extends LitElement {
   constructor() {
     super();
     this.posts = [];
-  }
-  firstUpdated() {
-    this.unsubscribe = subscribe((data) => this.posts = data.posts.documents);
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.unsubscribe();
   }
   render() {
     return html`
