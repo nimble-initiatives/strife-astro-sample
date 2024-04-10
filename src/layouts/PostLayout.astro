@@ -45,13 +45,17 @@ Use AstroSeo in all the pages you want different Seo than the index page
   <section>
     <div class="px-8 py-12 md:px-12 mx-auto lg:pt-24 max-w-7xl lg:px-32">
       <div class="lg:text-center">
-        <img
-          class="lg:h-72 w-full  object-cover object-center"
-          src={post.images.desktop.source.url}
-          alt=""
-          />
+          <picture>
+            <!-- Desktop image -->
+            <source media="(min-width: 768px)" srcset={post?.images?.desktop.source.url} sizes="1024px" />
+            <!-- Tablet image -->
+            <source media="(max-width: 767px)" srcset={post?.images?.tablet.source.url} sizes="927px" />
+            <!-- Fallback for browsers that do not support `<picture>` element -->
+            <img class="lg:h-72 w-full  object-cover object-center" src={post?.images?.desktop.source.url} alt="Fallback image description" />
+          </picture>
+
          <div class="flex  flex-col md:flex-row mt-4 justify-between">
-            <p class="text-xs text-zinc-500 ">{new Date(post.publishedDate).toString().slice(0, 10)} - Written by: {post.author}</p>
+            <p class="text-xs text-zinc-500 ">{new Date(post?.publishedDate).toString().slice(0, 10)} - Written by: {post?.author}</p>
            <div class="flex gap-3">
               <!-- {
                 post.tags.map((tag) => (
@@ -63,20 +67,19 @@ Use AstroSeo in all the pages you want different Seo than the index page
            </div>
          </div>
         <h1
+        is="str-h1"
+        data-field="title"
         class="text-4xl tracking-tight text-balance mt-12 lg:mt-16 font-medium font-display text-black md:text-8xl"
         >
-        {post.title}
+        {post?.title}
       </h1>
         <p class="max-w-2xl mt-8 mx-auto text-zinc-500">
-          <em>{post.description}</em>
+          <em is="str-em" data-field="description">{post?.description}</em>
         </p>
-
       </div>
 
       <div class="mt-12 max-w-2xl mx-auto">
-        <div class="prose-styles" set:html={post.content}>
-
-        </div>
+        <div is="str-div" data-field="content" class="prose-styles" set:html={post?.content}></div>
       </div>
     </div>
   </section>

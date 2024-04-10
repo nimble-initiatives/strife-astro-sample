@@ -26,12 +26,12 @@ export class PostList extends LitElement {
       ${this.posts?.map(
         (item) => html`
           <li>
-            <a href="/posts${item.url}" title="${item.title}" class="group">
+            <a href="${item.url}" title="${item.title}" class="group">
               <article class="flex-1 h-full flex flex-col">
                 <div class="block w-full lg:col-span-2">
                   <img
                     class="aspect-[2/3] object-cover bg-center h-full w-full"
-                    src=${item.images.listing.source.url}
+                    src=${item.images?.listing.source.url}
                     alt=${item.title}
                   />
                 </div>

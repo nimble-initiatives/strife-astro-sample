@@ -39,6 +39,13 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro --help` | Get help using the Astro CLI                     |
 
+## Deploy
+We offer integrations with Vercel to speed up the process by clicking one of the deploy buttons below.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnimble-initiatives%2Fmicroblog&env=STRIFE_CERTIFICATE,STRIFE_CERTIFICATE_PASSWORD,STRIFE_DATABASE_URLS,STRIFE_DATABASE&envDescription=API%20Keys%20needed%20for%20the%20application)
+
+Make sure to add the necessary environment variables values to the hosting provider environment variables.
+
 ## Want to learn more?
 
 Feel free to check Astros [documentation](https://docs.astro.build)
