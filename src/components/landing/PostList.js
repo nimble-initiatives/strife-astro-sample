@@ -14,7 +14,7 @@ export class PostList extends LitElement {
     this.posts = [];
   }
   firstUpdated() {
-    this.unsubscribe = subscribe((data) => this.posts = data.posts.documents);
+    this.unsubscribe = subscribe((data) => this.posts = data.posts?.documents || this.posts);
   }
   disconnectedCallback() {
     super.disconnectedCallback();

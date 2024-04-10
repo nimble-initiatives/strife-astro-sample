@@ -3,7 +3,7 @@ import store from "@/store/index";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/landing/Hero.astro";
 import { PostList } from "@/components/landing/PostList";
-import Cta from "@/components/global/Cta.astro";
+import { Sections } from "@/components/landing/Sections";
 
 // Get the home page content
 const session = store.openSession();
@@ -32,8 +32,8 @@ const sortedPosts = home.posts ? await session.advanced.rawQuery(home.posts.quer
           ))
         }
       </ol>
-      <PostList posts={sortedPosts} client:only="lit" />
+      <PostList posts={sortedPosts} client:only />
     </div>
   </section>
-  <Cta />
+  <Sections sections={home.sections} client:only />
 </BaseLayout>
