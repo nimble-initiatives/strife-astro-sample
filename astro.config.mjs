@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import basicSsl from '@vitejs/plugin-basic-ssl'
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
@@ -17,5 +18,11 @@ export default defineConfig({
     drafts: true
   },
   site: 'https://lexingtonthemes.com',
-  integrations: [tailwind(), sitemap(), mdx()]
+  integrations: [tailwind(), sitemap(), mdx()],
+  vite: {
+    plugins:[basicSsl()],
+    server: {
+      https: true
+    },
+  }
 });
