@@ -40,12 +40,12 @@ export class Sections extends LitElement {
                       name="email"
                       type="email"
                       class="block w-full rounded-full border border-zinc-900 px-4 py-2 font-spline text-sm font-medium text-zinc-800 placeholder-zinc-400 focus:border-zinc-800 focus:outline-none focus:ring-2 h-10 lg:px-6 focus:ring-zinc-700/50 bg-zinc-800 disabled:opacity-50"
-                      placeholder="Enter your email..."
+                      placeholder="${item?.placeholder}"
                       required=""
                     /><button
                       type="button"
                       class="items-center inline-flex border duration-300 focus:ring-2 h-10 focus:ring-offset-2 justify-center px-4 py-2 rounded-full text-sm bg-white border-transparent focus:ring-black hover:bg-white/10  hover:text-white   ring-1 ring-transparent text-black"
-                      ><div style="position:relative"></div>Subscribe<!-- -->
+                      ><div style="position:relative"></div>${item?.cta}<!-- -->
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
