@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import basicSsl from '@vitejs/plugin-basic-ssl'
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
@@ -21,6 +22,10 @@ export default defineConfig({
   integrations: [tailwind(), sitemap(), mdx(), lit()],
   output: "server",
   vite: {
+    plugins:[basicSsl()],
+    server: {
+      https: true
+    },
     ssr: {
       noExternal: ['@strifeapp/strife']
     }
